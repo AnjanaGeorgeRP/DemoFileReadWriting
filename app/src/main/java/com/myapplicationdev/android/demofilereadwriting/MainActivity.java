@@ -42,10 +42,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //Code for file writing
                 try {
-                    String folderLocation = Environment.getExternalStorageDirectory().getAbsolutePath() + "/MyFolder";
+                    folderLocation = Environment.getExternalStorageDirectory().getAbsolutePath() + "/MyFolder";
+                    File folder = new File(folderLocation);
+                    if (folder.exists() == false){
+                        createFolder();
+                    }
                     File targetFile = new File(folderLocation, "data.txt");
                     FileWriter writer = new FileWriter(targetFile, true);
-                    writer.write("Hello world" + "\nHello world"+ "\nHello world"+ "\nHello world"+ "\nHello world"+ "\nHello world"+ "\nHello world"+ "\nHello world"+ "\nHello world"+ "\nHello world"+ "\nHello world");
+                    writer.write("Hello world" + "\n");
                     writer.flush();
                     writer.close();
                 } catch (IOException e) {
@@ -59,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Code for file reading
-                String folderLocation = Environment.getExternalStorageDirectory().getAbsolutePath() + "/MyFolder";
+                folderLocation = Environment.getExternalStorageDirectory().getAbsolutePath() + "/MyFolder";
                 File targetFile = new File(folderLocation, "data.txt");
 
                 if (targetFile.exists() == true) {
@@ -94,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
     private void createFolder(){
         if (checkPermission()){
             folderLocation = Environment.getExternalStorageDirectory().getAbsolutePath() + "/MyFolder";
-
             File folder = new File(folderLocation);
             if (folder.exists() == false){
                 boolean result = folder.mkdir();
